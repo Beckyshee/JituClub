@@ -228,13 +228,24 @@ describe("Get One User", () => {
     const mockedExecute = jest.fn().mockResolvedValue({
       recordset: [
         {
-          id: userId,
-          name: "becky kariuki",
-          email: "becky.kariuki@thejitu.com",
-          phone_no: "01154256576",
-          id_no: "367577998",
-          cohort_no: "jgjfuy86869",
-          password: "HashedPass@word123",
+          // employee: userId,
+          // name: "becky kariuki",
+          // email: "becky.kariuki@thejitu.com",
+          // phone_no: "01154256576",
+          // id_no: "367577998",
+          // cohort_no: "jgjfuy86869",
+          // password: "HashedPass@word123",
+
+          employee_id: "0adbb3b5-dead-448f-9ca1-44f93d0e5527",
+          name: "Jane Doe",
+          email: "correct@email.com",
+          phone_no: "0754876562",
+          id_no: 363784563,
+          cohort_no: "20",
+          password:
+            "$2b$05$S.fpxBj3qNllnIvd.sq/beDjNoP72TvaMAS.GrplxY75sFyh6qV7e",
+          role: "employee",
+          welcomed: true,
         },
       ],
     });
@@ -255,15 +266,26 @@ describe("Get One User", () => {
 
     // Assertions
     expect(res.json).toHaveBeenCalledWith({
-      employee: [
+      user: [
         {
-          id: userId,
-          name: "becky kariuki",
-          email: "becky.kariuki@thejitu.com",
-          phone_no: "01154256576",
-          id_no: "367577998",
+          // id: userId,
+          // name: "becky kariuki",
+          // email: "becky.kariuki@thejitu.com",
+          // phone_no: "01154256576",
+          // id_no: "367577998",
+          // cohort_no: "20",
+          // password: "HashedPass@word123",
+
+          employee_id: "0adbb3b5-dead-448f-9ca1-44f93d0e5527",
+          name: "Jane Doe",
+          email: "correct@email.com",
+          phone_no: "0754876562",
+          id_no: 363784563,
           cohort_no: "20",
-          password: "HashedPass@word123",
+          password:
+            "$2b$05$S.fpxBj3qNllnIvd.sq/beDjNoP72TvaMAS.GrplxY75sFyh6qV7e",
+          role: "employee",
+          welcomed: true,
         },
       ],
     });

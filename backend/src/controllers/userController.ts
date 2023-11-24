@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import mssql from "mssql";
+import mssql from 'mssql'
 import { v4 } from "uuid";
 import bcrypt from "bcrypt";
 import { sqlConfig } from "../config/sqlConfig";
 import jwt from "jsonwebtoken";
-// import dotenv from 'dotenv'
+import dotenv from 'dotenv'
 import { loginUser } from "../interfaces/userInterface";
 import { ExtendedUser } from "../middleware/verifyToken";
 import Connection from "../dbHelpers/dbHelpers";
@@ -135,6 +135,32 @@ export const getOneUser = async (req: Request, res: Response) => {
     });
   } catch (error) {
     return res.json({
+      error: error,
+    });
+  }
+};
+
+export const updateUser = async (req: Request, res: Response) => {
+  try {
+    let { member_id } = req.params;
+    let { firstName, lastName, email, cohortNumber } = req.body;
+
+    const pool = await mssql.connect(sqlConfig);
+
+    const result = await pool
+      .request()
+      .input("member_id", member_id)
+      .input("firstName", mssql.VarChar, firstName)
+      .input("lastName", mssql.VarChar, lastName)
+      .input("email", mssql.VarChar, email)
+      .input("cohortNumber", mssql.Int, cohortNumber)
+      .execute("updateMember");
+
+    console.log(result);
+
+    return res.json({ message: "Member updated successfully" });
+  } catch (error) {
+    return res.status(500).json({
       error: error,
     });
   }
